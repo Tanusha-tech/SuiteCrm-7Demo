@@ -2,10 +2,10 @@ package tests;
 
 import org.testng.annotations.Test;
 
-import static org.testng.AssertJUnit.assertEquals;
-
+import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
+
     @Test
     public void checkLoginWithPositiveCred() {
         loginPage.open();
@@ -17,21 +17,24 @@ public class LoginTest extends BaseTest {
     public void checkLoginWithEmptyPassword() {
         loginPage.open();
         loginPage.login("standard_user", "");
-        assertEquals("Epic sadface: Password is required", loginPage.getErrorMessage());
+        assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required",
+                "Некорректное отображение текста ошибки при пустом пароле");
     }
 
     @Test
     public void checkLoginWithEmptyUser() {
         loginPage.open();
         loginPage.login("", "");
-        assertEquals("Epic sadface: Username is required", loginPage.getErrorMessage());
+        assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username is required",
+                "Некорректное отображение текста ошибки при пустом юзернейме");
     }
 
     @Test
     public void checkLoginWithNegativeCred() {
         loginPage.open();
         loginPage.login("test", "test");
-        assertEquals("Epic sadface: Username and password do not match any user in this service",
-                loginPage.getErrorMessage());
+        assertEquals(loginPage.getErrorMessage(),
+                "Epic sadface: Username and password do not match any user in this service",
+                "Неправильное отображение текста ошибки при некорректных данных");
     }
 }
