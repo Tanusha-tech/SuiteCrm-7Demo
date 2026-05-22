@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -10,6 +11,11 @@ public class LoginTest extends BaseTest {
     @Test(testName = "Авторизация с валидными данными",
             description = "Авторизация с валидными данными",
             groups = {"login", "smoke"})
+    @Description("Успешная авторизация")
+    @Epic("E2E")
+    @Feature("Login")
+    @TmsLink("Login-2")
+    @Owner("Lyamkina Tatyana")
     public void checkLoginWithPositiveCred() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -25,10 +31,15 @@ public class LoginTest extends BaseTest {
         };
     }
 
-    @Test(testName = "Негавтивная авторизация",
-            description = "Негавтивная авторизация",
+    @Test(testName = "Негативная авторизация",
+            description = "Негативная авторизация",
             groups = {"login", "regression"},
             dataProvider = "Тестовые данные для негативных проверок входа")
+    @Description("Негативная авторизация")
+    @Epic("E2E")
+    @Feature("Login")
+    @TmsLink("Login-2")
+    @Owner("Lyamkina Tatyana")
     public void negativeLogin(String userName, String password, String errorMessage) {
         loginPage.open();
         loginPage.login(userName, password);

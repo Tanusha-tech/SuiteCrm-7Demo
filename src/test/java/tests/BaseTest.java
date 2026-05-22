@@ -1,20 +1,22 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.testng.AllureTestNg;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.ITestContext;
+import org.testng.annotations.*;
 import pages.CartPage;
 import pages.CheckoutPage;
 import pages.LoginPage;
 import pages.ProductsPage;
+import utils.TestListener;
 
 import java.util.HashMap;
 
+@Listeners({AllureTestNg.class, TestListener.class})
 public class BaseTest {
 
     WebDriver driver;
@@ -24,8 +26,9 @@ public class BaseTest {
     CheckoutPage checkoutPage;
 
     @Parameters({"browser"})
-    @BeforeMethod (alwaysRun = true)
-    public void setUp(@Optional("chrome") String browser) {
+    @BeforeMethod (alwaysRun = true, description = "Настройка браузера")
+    @Description("Настройка браузера")
+    public void setUp(@Optional("chrome") String browser, ITestContext iTestContext) {
         if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
             HashMap<String, Object> chromePrefs = new HashMap<>();
@@ -45,9 +48,12 @@ public class BaseTest {
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
         checkoutPage = new CheckoutPage(driver);
+
+        iTestContext.setAttribute("driver", driver);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true, description = "Закрытие браузера")
+    @Description("Закрытие браузера")
     public void tearDown() {
         driver.quit();
     }
