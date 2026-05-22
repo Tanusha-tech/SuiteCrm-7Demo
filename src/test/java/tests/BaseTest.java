@@ -31,6 +31,7 @@ public class BaseTest {
         options.addArguments("--disable-notification");
         options.addArguments("--disable-popup_blocking");
         options.addArguments("--disable-infobars");
+        options.addArguments("--headless");
         driver = new ChromeDriver(options);
 
         loginPage = new LoginPage(driver);
