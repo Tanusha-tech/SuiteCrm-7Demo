@@ -1,48 +1,60 @@
 package tests;
 
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.assertEquals;
 
 public class CartTest extends BaseTest {
 
-    @Test
+    SoftAssert softAssert = new SoftAssert();
+
+    @Test(testName = "Добавление товара в корзину",
+            description = "Добавление товара в корзину",
+            groups = {"cart", "smoke"},
+            retryAnalyzer = Retry.class)
     public void checkCartIsNotEmpty() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         productsPage.clickAddToCartButton();
         productsPage.clickShoppingCart();
-        assertEquals("Переход на страницу не выполнен!",
-                "Your Cart", cartPage.getTitle());
-        assertTrue(cartPage.isCartNotEmpty(), "Корзина пуста!");
+        softAssert.assertEquals(cartPage.getTitle(),
+                "Your Cart", "Переход на страницу не выполнен!");
+        softAssert.assertTrue(cartPage.isCartNotEmpty(), "Корзина пуста!");
+        softAssert.assertAll();
     }
 
-    @Test
+    @Test(testName = "Открытие страницы Checkout",
+            description = "Открытие страницы Checkout",
+            groups = {"cart", "smoke"},
+            retryAnalyzer = Retry.class)
     public void checkCheckoutButton() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         productsPage.clickAddToCartButton();
         productsPage.clickShoppingCart();
-        assertEquals("Переход на страницу не выполнен!",
-                "Your Cart", cartPage.getTitle());
+        softAssert.assertEquals(cartPage.getTitle(),
+                "Your Cart","Переход на страницу не выполнен!");
         cartPage.clickCheckoutButton();
-        assertEquals("Переход на страницу не был выполнен!",
-                "Checkout: Your Information", checkoutPage.getTitle());
+        softAssert.assertEquals(checkoutPage.getTitle(),
+                "Checkout: Your Information", "Переход на страницу не был выполнен!");
+        softAssert.assertAll();
     }
 
-    @Test
+    @Test(testName = "Продолжение покупок(Continue Shopping)",
+            description = "Продолжение покупок(Continue Shopping)",
+            groups = {"cart", "smoke"},
+            retryAnalyzer = Retry.class)
     public void checkContinueShoppingButton() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         productsPage.clickAddToCartButton();
         productsPage.clickShoppingCart();
-
-        assertEquals("Переход на страницу не выполнен!",
-                "Your Cart", cartPage.getTitle());
+        softAssert.assertEquals(cartPage.getTitle(),
+                "Your Cart", "Переход на страницу не выполнен!");
         cartPage.clickContinueShoppingButton();
-        assertEquals("Переход на страницу не выполнен!",
-                "Products", productsPage.getTitle());
+        softAssert.assertEquals(productsPage.getTitle(),
+                "Products", "Переход на страницу не выполнен!");
+        softAssert.assertAll();
     }
 }
 
