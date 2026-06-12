@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Создание нового аккаунта","6486","checkAddNewAccount","SuiteCRM Lyamkina","2026-06-12","passed","2026-06-12","tests.NewAccountTest","Chrome","tests.NewAccountTest","checkAddNewAccount"
+"Создание нового аккаунта. Негатив","3729","checkAddNewAccountNegative","SuiteCRM Lyamkina","2026-06-12","passed","2026-06-12","tests.NewAccountTest","Chrome","tests.NewAccountTest","checkAddNewAccountNegative"
+"Создание нового контакта. Негатив","3873","checkAddNewAccountNegative","SuiteCRM Lyamkina","2026-06-12","passed","2026-06-12","tests.NewContactTest","Firefox","tests.NewContactTest","checkAddNewAccountNegative"
+"Проверка создания нового контакта","4772","checkAddNewContact","SuiteCRM Lyamkina","2026-06-12","passed","2026-06-12","tests.NewContactTest","Firefox","tests.NewContactTest","checkAddNewContact"
