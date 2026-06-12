@@ -8,12 +8,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import wrappers.*;
 
-import java.time.Duration;
-
-import static org.testng.Assert.*;
 import static org.testng.Assert.assertEquals;
 
 @Log4j2
@@ -30,7 +26,6 @@ public class NewContactPage extends BasePage {
     }
 
     public String getErrorName() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement errorElement = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(ERROR_LASTNAME)
         );
@@ -47,9 +42,7 @@ public class NewContactPage extends BasePage {
 
     @Override
     public NewContactPage isPageOpened() {
-        assertTrue(driver.findElement(By.xpath("//title[contains(text(),'CREATE') " +
-                        "and contains(text(), 'Contacts')]"))
-                .isEnabled());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE_CONTACT));
         return this;
     }
 
@@ -122,5 +115,4 @@ public class NewContactPage extends BasePage {
         assertEquals(getErrorName(), "Missing required field: Last Name",
                 "Нотификация не отображается или поле заполнено");
     }
-
 }
