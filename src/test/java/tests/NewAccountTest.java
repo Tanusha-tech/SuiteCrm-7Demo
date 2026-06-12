@@ -28,7 +28,7 @@ public class NewAccountTest extends BaseTest {
     @Test
     @Description("Создание нового аккаунта")
     public void checkAddNewAccount() {
-        loginStep.auth("will", "will");
+        loginStep.auth(user, password);
         newAccountPage.open()
                 .isPageOpened()
                 .addNewAccount(account2)
@@ -42,7 +42,7 @@ public class NewAccountTest extends BaseTest {
     @Test
     @Description("Создание нового аккаунта. Негатив")
     public void checkAddNewAccountNegative() {
-        loginStep.auth("will", "will");
+        loginStep.auth(user, password);
         newAccountPage.open()
                 .isPageOpened()
                 .addNewAccount(account)

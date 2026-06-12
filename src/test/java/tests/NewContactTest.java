@@ -21,7 +21,7 @@ public class NewContactTest extends BaseTest {
     @Test
     @Description("Проверка создания нового контакта")
     public void checkAddNewContact() {
-        loginStep.auth("will", "will");
+        loginStep.auth(user, password);
         newContactPage.open()
                 .isPageOpened()
                 .addNewContact(contact)
@@ -35,7 +35,7 @@ public class NewContactTest extends BaseTest {
     @Test
     @Description("Создание нового контакта. Негатив")
     public void checkAddNewAccountNegative() {
-        loginStep.auth("will", "will");
+        loginStep.auth(user, password);
         newContactPage.open()
                 .isPageOpened()
                 .addNewContact(contactNegative)

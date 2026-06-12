@@ -14,6 +14,7 @@ import org.testng.annotations.Optional;
 import pages.NewAccountPage;
 import pages.NewContactPage;
 import step.LoginStep;
+import utils.PropertyReader;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -25,6 +26,9 @@ public class BaseTest {
     protected NewAccountPage newAccountPage;
     protected NewContactPage newContactPage;
     protected LoginStep loginStep;
+
+    protected String user = System.getProperty("user", PropertyReader.getProperty("user"));
+    protected String password = System.getProperty("password", PropertyReader.getProperty("password"));
 
     @BeforeMethod(alwaysRun = true)
     @Description("Настройка браузера")
